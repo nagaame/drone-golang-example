@@ -1,0 +1,10 @@
+version: '3'
+services:
+  demo-server:
+    image: example/demo:latest
+    ports:
+      - "8088:8088"
+    volumes:
+#      - ./data:/var/lib/drone/
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:

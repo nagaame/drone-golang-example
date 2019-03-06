@@ -1,0 +1,48 @@
+kind: pipeline
+name: demo
+
+steps:
+  - name: build
+    image: golang:1.11.4
+    commands:
+      - pwd
+      - go version
+      - go build .
+      - go test demo/util
+
+  #  - name: frontend
+  #    image: node:6
+  #    commands:
+  #      - npm install
+  #      - npm test
+
+  - name: publish
+    image: plugins/docker:latest
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: example/demo
+      tags: latest
+
+  - name: deploy
+    image: appleboy/drone-ssh
+    pull: true
+    settings:
+      host: kanda.me
+      user: cpp
+      key:
+        from_secret: deploy_key
+      script:
+        - cd /data/
+        - mkdir app/
+        - cd /data/app
+        - docker rmi -f example/demo
+        - echo "login docker"
+#        - docker login --username ${DOCKER_USER} --password ${DOCKER_SEC}
+        - echo "login success, pulling..."
+        - docker pull example/demo:latest
+        - echo "image running"
+        - docker run -p 8088:8088 -d example/demo
+        - echo "run success"
