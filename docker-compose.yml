@@ -3,7 +3,7 @@ services:
   demo-server:
     image: example/demo:latest
     ports:
-      - "8088:8088"
+      - "8080:8080"
     volumes:
 #      - ./data:/var/lib/drone/
       - /var/run/docker.sock:/var/run/docker.sock

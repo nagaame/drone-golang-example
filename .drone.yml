@@ -8,7 +8,6 @@ steps:
       - pwd
       - go version
       - go build .
-      - go test demo/util
 
   #  - name: frontend
   #    image: node:6

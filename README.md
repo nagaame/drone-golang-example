@@ -17,8 +17,8 @@ services:
     image: drone/drone:latest
     ports:
       - "8080:80"
-      - 8843:443
-      - 9000
+      - "8843:443"
+      - "9000"
     volumes:
       - ./drone:/var/lib/drone/
       - /var/run/docker.sock:/var/run/docker.sock
@@ -51,7 +51,7 @@ services:
       - ./gogs/mysql:/var/lib/mysql
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 3308:3306
+      - "3308:3306"
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: pass
@@ -72,8 +72,8 @@ services:
       - DRONE_SECRET=ALQU2M0KdptXUdTPKcEw
       - DRONE_MAX_PROCS=5
   docker-bind:
-     image: docker:dind
-     privileged: true
+    image: docker:dind
+    privileged: true
     #  command: --storage-driver=overlay
 ```
 
