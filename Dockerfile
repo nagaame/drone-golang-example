@@ -1,4 +1,4 @@
-FROM golang:1.18.1
+FROM golang:1.18.2
 WORKDIR ${GOPATH}/src/demo
 COPY . ${GOPATH}/src/demo
 
