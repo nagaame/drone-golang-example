@@ -3,7 +3,7 @@ name: demo
 
 steps:
   - name: build
-    image: golang:1.18.2
+    image: golang:1.18.3
     commands:
       - pwd
       - go version
